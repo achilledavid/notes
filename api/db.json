@@ -1,0 +1,22 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "title": "Buy milk",
+      "content": "Remember to buy milk"
+    },
+    {
+      "id": 2,
+      "title": "Buy chocolate",
+      "content": "Remember to buy chocolate"
+    },
+    {
+      "title": "Buy lettuce",
+      "content": "Remember to buy lettuce",
+      "id": 4
+    }
+  ],
+  "profile": {
+    "name": "Achille"
+  }
+}
