@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-export const LinkToNoteStyle = styled(Link)`
+export const LinkToNoteStyleSaved = styled(Link)`
     width: 100%;
     padding: 5px 10px;
     border-radius: 5px;
@@ -25,6 +25,10 @@ export const LinkToNoteStyle = styled(Link)`
         overflow: hidden;
         font-size: 0.5rem
     }
+`;
+
+export const LinkToNoteStyle = styled(LinkToNoteStyleSaved)`
+    background-color: red;
 `;
 
 export const LinkToAddStyle = styled(Link)`

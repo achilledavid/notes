@@ -2,12 +2,12 @@
   "notes": [
     {
       "title": "Buy milk",
-      "content": "Remember to buy milk and some lettuce",
+      "content": "Remember to buy milk and some lettuce.",
       "id": 1
     },
     {
       "title": "Buy chocolate",
-      "content": "Remember to buy chocolate",
+      "content": "Remember to buy chocolate.",
       "id": 2
     }
   ],

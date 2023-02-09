@@ -1,6 +1,6 @@
-import { LinkToNoteStyle } from "./LinkToNoteStyle";
+import { LinkToNoteStyle, LinkToNoteStyleSaved } from "./LinkToNoteStyle";
 
-const NoteInList = ({ id, title, content }) => {
+export const NoteInList = ({ id, title, content }) => {
     return (
         <LinkToNoteStyle to={`/notes/${id}`}>
             {title}
@@ -9,4 +9,11 @@ const NoteInList = ({ id, title, content }) => {
     );
 }
 
-export default NoteInList;
+export const NoteInListSaved = ({ id, title, content }) => {
+    return (
+        <LinkToNoteStyleSaved to={`/notes/${id}`}>
+            {title}
+            <p>{content}</p>
+        </LinkToNoteStyleSaved>
+    );
+}

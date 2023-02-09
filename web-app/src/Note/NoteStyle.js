@@ -24,3 +24,13 @@ export const Textarea = styled.textarea`
   flex: 1;
   background: transparent;
 `;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  p {
+    font-size: 0.65rem
+  }
+`;
