@@ -10,6 +10,7 @@ export const Form = styled.form`
 
 export const Title = styled.input`
   font-size: 1.3rem;
+  font-weight: 600;
   border: none;
   outline: none;
   border-bottom: 1px solid ${(props) => props.theme.main};

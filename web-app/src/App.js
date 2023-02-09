@@ -1,13 +1,14 @@
 import { GlobalStyle, Main, Side, WhiteTheme, DarkTheme } from './GlobalStyle';
-import { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import Note from './Note';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import NoteInList from './LinkToNote';
 import NoteListStyle from './NotesList/NotesListStyle';
-import { Button } from './Button/ButtonStyle';
 import { Routes, Route } from 'react-router';
 import { Link } from 'react-router-dom';
+import AddNote from './AddNote';
+import { LinkToAddStyle } from './LinkToNote/LinkToNoteStyle';
 
 function App() {
 
@@ -27,15 +28,16 @@ function App() {
     <ThemeProvider theme={WhiteTheme}>
       <GlobalStyle />
       <Side>
-        <p>Toutes les notes : </p>
         {notes &&
           <NoteListStyle>
+            <LinkToAddStyle to={'/addNote'}>
+              + Ajouter une note
+            </LinkToAddStyle>
             {notes.map((note) => {
               return (
                 <NoteInList key={note.id} note={note} ></NoteInList>
               );
             })}
-            {/* <Link to={'/add'}>Ajouter une note</Link> */}
           </NoteListStyle>
         }
         {!notes &&
@@ -45,7 +47,7 @@ function App() {
       <Main>
         <Routes>
           <Route path='/' element={<p>Veuillez séléctionner une note</p>} />
-          <Route path='/add' element={<Note />} />
+          <Route path='/addNote' element={<AddNote />} />
           <Route path='/notes/:id' element={<Note />} />
         </Routes>
       </Main>

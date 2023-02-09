@@ -6,13 +6,13 @@
       "content": "Remember to buy milk"
     },
     {
-      "id": 2,
       "title": "Buy chocolate",
-      "content": "Remember to buy chocolate"
+      "content": "Remember to buy chocolate",
+      "id": 2
     },
     {
       "title": "Buy lettuce",
-      "content": "Remember to buy lettuce",
+      "content": "Remember to buy lettuce test test",
       "id": 4
     }
   ],
