@@ -1,18 +1,19 @@
 import { GlobalStyle, Main, Side, WhiteTheme, DarkTheme } from './GlobalStyle';
-import styled, { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import Note from './Note';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import NoteInList from './LinkToNote';
 import NoteListStyle from './NotesList/NotesListStyle';
 import { Routes, Route } from 'react-router';
-import { Link } from 'react-router-dom';
 import AddNote from './AddNote';
 import { LinkToAddStyle } from './LinkToNote/LinkToNoteStyle';
+import { useNavigate } from 'react-router-dom';
 
 function App() {
 
   let [notes, setNotes] = useState(null);
+  const navigate = useNavigate();
 
   const fetchNotes = async () => {
     const response = await fetch('/notes');
@@ -24,8 +25,45 @@ function App() {
     fetchNotes();
   }, []);
 
+  const deleteNote = async (event, id) => {
+    event.preventDefault();
+    const response = await fetch(`/notes/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    setNotes(notes.filter((note) => note.id !== id));
+    navigate('/')
+  };
+
+  const addNote = async (note) => {
+    const response = await fetch(`/notes`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(note)
+    });
+    const data = await response.json();
+    setNotes([...notes, data]);
+    navigate('/notes/' + data.id);
+  };
+
+  const updateNote = async (note, id) => {
+    const response = await fetch(`/notes/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(note)
+    });
+    const data = await response.json();
+    setNotes(notes.map((note) => note.id === id ? data : note));
+  };
+
   return (
-    <ThemeProvider theme={WhiteTheme}>
+    <ThemeProvider theme={DarkTheme}>
       <GlobalStyle />
       <Side>
         {notes &&
@@ -47,8 +85,8 @@ function App() {
       <Main>
         <Routes>
           <Route path='/' element={<p>Veuillez séléctionner une note</p>} />
-          <Route path='/addNote' element={<AddNote />} />
-          <Route path='/notes/:id' element={<Note />} />
+          <Route path='/addNote' element={<AddNote onAdd={addNote} />} />
+          <Route path='/notes/:id' element={<Note onDelete={deleteNote} onUpdate={updateNote} />} />
         </Routes>
       </Main>
     </ThemeProvider >

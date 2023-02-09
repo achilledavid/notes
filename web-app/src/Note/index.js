@@ -3,54 +3,42 @@ import { Button } from '../Button/ButtonStyle';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-const Note = () => {
+const Note = ({ onDelete, onUpdate }) => {
     const { id } = useParams();
-    const navigate = useNavigate();
     let [note, setNote] = useState(null);
 
     const fetchNote = useCallback(async () => {
         const response = await fetch(`/notes/${id}`);
         const data = await response.json();
         setNote(data);
-        console.log(data.title)
     }, [id]);
 
     useEffect(() => {
         fetchNote();
     }, [id, fetchNote]);
 
-    const saveNote = async () => {
-        alert('Note modifiée !');
-        const title = document.querySelector('input').value;
-        const content = document.querySelector('textarea').value;
-        const response = await fetch(`/notes/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ title, content })
-        });
+    const updateNoteTitle = async (event) => {
+        setNote({ title: event.target.value, content: note.content, id: note.id });
     };
 
-    const deleteNote = async () => {
-        alert('Note supprimée !');
-        const response = await fetch(`/notes/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-        navigate('/addNote')
+    const updateNoteContent = async (event) => {
+        setNote({ title: note.title, content: event.target.value, id: note.id });
     };
+
+    useEffect(() => {
+        const delay = setTimeout(() => {
+            onUpdate(note, note.id)
+        }, 1000)
+
+        return () => clearTimeout(delay)
+    }, [note])
 
     return (
-        <Form>
-            <Title type='text' placeholder='Titre' defaultValue={note ? note.title : ""} />
-            <Textarea placeholder='Entrez votre texte ici...' defaultValue={note ? note.content : ""} />
-            <Button onClick={saveNote}>Enregistrer</Button>
-            <Button onClick={deleteNote}>Supprimer</Button>
+        <Form onSubmit={(event) => event.preventDefault()}>
+            <Title type='text' placeholder='Titre' value={note ? note.title : ""} onChange={updateNoteTitle} />
+            <Textarea placeholder='Entrez votre texte ici...' value={note ? note.content : ""} onChange={updateNoteContent} />
+            <Button onClick={(event) => onDelete(event, note.id)}>Supprimer</Button>
         </Form>
     );
 };

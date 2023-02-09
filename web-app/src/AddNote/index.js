@@ -1,30 +1,26 @@
 import { Form, Title, Textarea } from '../Note/NoteStyle';
 import { Button } from '../Button/ButtonStyle';
-import { useNavigate } from 'react-router';
+import { useState } from 'react';
 
-const AddNote = () => {
-    const navigate = useNavigate();
+const AddNote = ({ onAdd }) => {
+    let [note, setNote] = useState({
+        title: '',
+        content: ''
+    });
 
-    const saveNote = async () => {
-        const title = document.querySelector('input').value;
-        const content = document.querySelector('textarea').value;
-        const response = await fetch(`/notes`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ title, content })
-        });
-        const data = await response.json();
-        alert('Note ajoutée !');
-        navigate(`/note/${data.id}`);
+    const updateNoteTitle = (event) => {
+        setNote({ title: event.target.value, content: note.content });
+    };
+
+    const updateNoteContent = (event) => {
+        setNote({ title: note.title, content: event.target.value });
     };
 
     return (
-        <Form>
-            <Title type='text' placeholder='Titre' />
-            <Textarea placeholder='Entrez votre texte ici...' />
-            <Button onClick={saveNote}>Ajouter</Button>
+        <Form onSubmit={(event) => { event.preventDefault(); onAdd(note); }}>
+            <Title type='text' placeholder='Titre' onChange={updateNoteTitle} />
+            <Textarea placeholder='Entrez votre texte ici...' onChange={updateNoteContent} />
+            <Button type='submit' >Ajouter</Button>
         </Form>
     );
 }
