@@ -26,14 +26,14 @@ function App() {
   }, []);
 
   const deleteNote = async (event, id) => {
-    event.preventDefault();
+    // event.preventDefault();
     const response = await fetch(`/notes/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
       }
     });
-    setNotes(notes.filter((note) => note.id !== id));
+    setNotes(notes.filter((note) => note.id !== parseInt(id)));
     navigate('/')
   };
 

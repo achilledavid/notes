@@ -43,6 +43,7 @@ export const WhiteTheme = {
   body: '#ffffff',
   main: '#f1f1f1',
   color: '#000000',
+  contrast: '#ffffff',
 };
 
 export const DarkTheme = {
@@ -50,6 +51,7 @@ export const DarkTheme = {
   body: '#343434',
   main: '#1e1e1e',
   color: '#ffffff',
+  contrast: '#000000',
 };
 
 export const Loader = styled(BiLoaderAlt)`
