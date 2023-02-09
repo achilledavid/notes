@@ -3,6 +3,7 @@ import { Button } from '../Button/ButtonStyle';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useCallback } from 'react';
+import { Loader } from '../GlobalStyle';
 
 const Note = ({ onDelete, onUpdate }) => {
     const { id } = useParams();
@@ -35,11 +36,19 @@ const Note = ({ onDelete, onUpdate }) => {
     }, [note])
 
     return (
-        <Form onSubmit={(event) => event.preventDefault()}>
-            <Title type='text' placeholder='Titre' value={note ? note.title : ""} onChange={updateNoteTitle} />
-            <Textarea placeholder='Entrez votre texte ici...' value={note ? note.content : ""} onChange={updateNoteContent} />
-            <Button onClick={(event) => onDelete(event, note.id)}>Supprimer</Button>
-        </Form>
+        <>
+            {note &&
+                <Form onSubmit={(event) => event.preventDefault()}>
+                    <Title type='text' placeholder='Titre' value={note ? note.title : ""} onChange={updateNoteTitle} />
+                    <Textarea placeholder='Entrez votre texte ici...' value={note ? note.content : ""} onChange={updateNoteContent} />
+                    <Button onClick={(event) => onDelete(event, note.id)}>Supprimer</Button>
+                </Form>
+            }
+            {
+                !note &&
+                <Loader></Loader>
+            }
+        </>
     );
 };
 

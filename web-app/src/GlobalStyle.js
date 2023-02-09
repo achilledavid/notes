@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
+import { BiLoaderAlt } from 'react-icons/bi'
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -17,8 +18,8 @@ export const GlobalStyle = createGlobalStyle`
 const globalPadding = '20px';
 
 export const Main = styled.main`
-  margin-left: 240px;
   padding: ${globalPadding};
+  padding-left: 260px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -50,3 +51,37 @@ export const DarkTheme = {
   main: '#1e1e1e',
   color: '#ffffff',
 };
+
+export const Loader = styled(BiLoaderAlt)`
+font-size: 2rem;
+animation: spin 800ms ease-in-out infinite;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+
+@keyframes spin {
+from {
+    transform: translate(-50%, -50%) rotate(0deg);
+}
+
+to {
+    transform: translate(-50%, -50%) rotate(360deg);
+}
+}
+`;
+
+export const Empty = styled.p`
+  font-size: 1.5rem;
+  font-weight: 600;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+export const Container = styled.div`
+  flex: 1;
+  display: flex;
+  position: relative;
+`;

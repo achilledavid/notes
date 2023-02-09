@@ -1,10 +1,10 @@
 import { LinkToNoteStyle } from "./LinkToNoteStyle";
 
-const NoteInList = ({ note }) => {
+const NoteInList = ({ id, title, content }) => {
     return (
-        <LinkToNoteStyle to={`/notes/${note.id}`}>
-            {note.title}
-            <p>{note.content}</p>
+        <LinkToNoteStyle to={`/notes/${id}`}>
+            {title}
+            <p>{content}</p>
         </LinkToNoteStyle>
     );
 }

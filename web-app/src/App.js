@@ -1,5 +1,5 @@
-import { GlobalStyle, Main, Side, WhiteTheme, DarkTheme } from './GlobalStyle';
-import { ThemeProvider } from 'styled-components';
+import { GlobalStyle, Main, Side, WhiteTheme, DarkTheme, Loader, Empty, Container } from './GlobalStyle';
+import styled, { ThemeProvider } from 'styled-components';
 import Note from './Note';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -51,6 +51,7 @@ function App() {
   };
 
   const updateNote = async (note, id) => {
+
     const response = await fetch(`/notes/${id}`, {
       method: 'PUT',
       headers: {
@@ -73,21 +74,23 @@ function App() {
             </LinkToAddStyle>
             {notes.map((note) => {
               return (
-                <NoteInList key={note.id} note={note} ></NoteInList>
+                <NoteInList key={note.id} id={note.id} title={note.title ? note.title : "Titre"} content={note.content ? note.content : "Entrez votre texte ici..."} ></NoteInList>
               );
             })}
           </NoteListStyle>
         }
         {!notes &&
-          <p>Chargement...</p>
+          <Loader />
         }
       </Side>
       <Main>
-        <Routes>
-          <Route path='/' element={<p>Veuillez séléctionner une note</p>} />
-          <Route path='/addNote' element={<AddNote onAdd={addNote} />} />
-          <Route path='/notes/:id' element={<Note onDelete={deleteNote} onUpdate={updateNote} />} />
-        </Routes>
+        <Container>
+          <Routes>
+            <Route path='/' element={<Empty>Veuillez séléctionner une note</Empty>} />
+            <Route path='/addNote' element={<AddNote onAdd={addNote} />} />
+            <Route path='/notes/:id' element={<Note onDelete={deleteNote} onUpdate={updateNote} />} />
+          </Routes>
+        </Container>
       </Main>
     </ThemeProvider >
   );
