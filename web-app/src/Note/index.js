@@ -10,6 +10,7 @@ const Note = ({ onDelete, onUpdate }) => {
     let [note, setNote] = useState(null);
 
     const fetchNote = useCallback(async () => {
+        setNote(null);
         const response = await fetch(`/notes/${id}`);
         const data = await response.json();
         setNote(data);
