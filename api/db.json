@@ -1,25 +1,65 @@
 {
   "notes": [
     {
-      "title": "Buy coffee",
-      "content": "Remember to buy coffee",
+      "title": "Running",
+      "content": "Remember to run 5km.",
       "id": 1,
-      "pinned": true
+      "pinned": false,
+      "locked": true,
+      "tags": [
+        {
+          "id": 2
+        }
+      ]
     },
     {
       "title": "Buy chocolate",
       "content": "Remember to buy chocolate.",
       "id": 3,
-      "pinned": true
+      "pinned": true,
+      "locked": true,
+      "tags": [
+        {
+          "id": 1
+        }
+      ]
     },
     {
       "title": "Buy milk",
       "content": "Remember to buy milk and some lettuce.",
       "id": 4,
-      "pinned": true
+      "pinned": true,
+      "locked": false,
+      "tags": [
+        {
+          "id": 1
+        }
+      ]
     }
   ],
   "profile": {
     "name": "Achille"
-  }
+  },
+  "tags": [
+    {
+      "name": "sport",
+      "id": 2,
+      "color": "#0077b6"
+    },
+    {
+      "name": "shopping",
+      "id": 1,
+      "color": "#55a630"
+    },
+    {
+      "name": "aze",
+      "color": "#e91616",
+      "id": 3
+    },
+    {
+      "name": "chips",
+      "color": "#0f71cc",
+      "id": 4
+    }
+  ]
 }

@@ -18,6 +18,7 @@ export const NoteListStyle = styled.div`
         justify-content: space-between;
         align-items: center;
         margin-bottom: 10px;
+        flex-wrap: wrap;
 
         h1 {
             font-size: 1.5rem;
@@ -29,6 +30,10 @@ export const NoteListStyle = styled.div`
             gap: 5px;
             align-items: center;
         }
+    }
+
+    .choose_tag {
+        width: 100%;
     }
 `;
 

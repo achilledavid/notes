@@ -9,9 +9,10 @@ import { Routes, Route } from "react-router";
 import AddNote from "./AddNote";
 import { LinkToAddStyle } from "./LinkToNote/LinkToNoteStyle";
 import { useNavigate, useParams } from "react-router-dom";
-import { BsFillPinFill, BsPin, BsFillSunFill, BsFillMoonFill, BsPlusLg } from "react-icons/bs";
+import { BsFillPinFill, BsPin, BsFillSunFill, BsFillMoonFill, BsPlusLg, BsTagsFill } from "react-icons/bs";
 import { Button } from "./Button/ButtonStyle";
 import Notif from "./Notif";
+import Tags from "./Tags";
 
 function App() {
   let [notes, setNotes] = useState(null);
@@ -93,6 +94,25 @@ function App() {
     setNotes(notes.map((note) => (note.id === parseInt(id) ? data : note)));
   };
 
+  // Vérouiller une note
+
+  const lockNote = async (note, id) => {
+    if (note.locked) {
+      note.locked = false;
+    } else {
+      note.locked = true;
+    }
+    const response = await fetch(`/notes/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(note),
+    });
+    const data = await response.json();
+    setNotes(notes.map((note) => (note.id === parseInt(id) ? data : note)));
+  };
+
   // Changement de thème
 
   const toggleTheme = () => {
@@ -109,6 +129,12 @@ function App() {
     navigate("/addNote");
   };
 
+  // Navigation vers la page d'ajout de note
+
+  const goToTags = () => {
+    navigate("/tags");
+  };
+
   return (
     <ThemeProvider theme={theme === 'light' ? WhiteTheme : DarkTheme}>
       <GlobalStyle />
@@ -118,6 +144,11 @@ function App() {
             <div className="head">
               <h1>Notes</h1>
               <div className="buttons">
+                <Button className="icon small" onClick={goToTags}>
+                  <span>
+                    <BsTagsFill></BsTagsFill>
+                  </span>
+                </Button>
                 <Button className="icon small" onClick={goToAdd}>
                   <span>
                     <BsPlusLg></BsPlusLg>
@@ -146,15 +177,16 @@ function App() {
                         <NoteInListSaved
                           key={note.id}
                           id={note.id}
-                          title={note.title ? note.title : "Titre"}
+                          title={note.title ? note.title : "Title"}
                           content={
                             note.content
                               ? note.content
-                              : "Entrez votre texte ici..."
+                              : "Type your text here..."
                           }
                           pinned={note.pinned}
                           active={note.id === isSelected && "selected"}
                           setIsSelected={setIsSelected}
+                          locked={note.locked}
                         ></NoteInListSaved>
                       </>
                     )}
@@ -175,11 +207,11 @@ function App() {
                         <NoteInListSaved
                           key={note.id}
                           id={note.id}
-                          title={note.title ? note.title : "Titre"}
+                          title={note.title ? note.title : "Title"}
                           content={
                             note.content
                               ? note.content
-                              : "Entrez votre texte ici..."
+                              : "Type your text here..."
                           }
                           pinned={note.pinned}
                           active={note.id === isSelected && "selected"}
@@ -203,6 +235,7 @@ function App() {
               element={<Empty>Veuillez séléctionner une note</Empty>}
             />
             <Route path="/addNote" element={<AddNote onAdd={addNote} />} />
+            <Route path="/tags" element={<Tags />} />
             <Route
               path="/notes/:id"
               element={
@@ -210,6 +243,7 @@ function App() {
                   onDelete={deleteNote}
                   onUpdate={updateNote}
                   onPin={pinNote}
+                  onLock={lockNote}
                 />
               }
             />

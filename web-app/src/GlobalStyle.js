@@ -8,6 +8,7 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-family: 'Poppins', sans-serif;
     color: ${(props) => props.theme.color};
+    transition: all 200ms ease;
   }
 
   body {

@@ -14,11 +14,20 @@ export const LinkToNoteStyleSaved = styled(Link)`
     overflow: hidden;
     position: relative;
 
+    .lock {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 0.5rem;
+    }
+
     &:hover {
         filter : brightness(0.9);
     }
 
     p {
+        max-width: 90%;
         margin-left: 5px;
         opacity: 0.7;
         text-overflow: ellipsis;

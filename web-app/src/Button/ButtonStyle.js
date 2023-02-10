@@ -21,6 +21,7 @@ export const Button = styled.button`
             }
         }
     }
+        
 
     &:hover {
         filter : brightness(0.9);
@@ -31,5 +32,14 @@ export const Button = styled.button`
         display: flex;
         align-items: center;
         gap: 5px;
+    }
+
+    &.tag {
+        font-weight: 500;
+        cursor:default;
+
+        &:hover {
+            filter: brightness(1);
+        }
     }
 `;
