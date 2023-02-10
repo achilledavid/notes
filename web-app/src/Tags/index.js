@@ -45,6 +45,17 @@ const Tags = () => {
         document.querySelector('input[type="color"]').value = '';
     };
 
+    const deleteTag = async (event, name, id) => {
+        event.preventDefault();
+        const response = await fetch(`/tags/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        setTags(tags.filter((tag) => tag.id !== parseInt(id)));
+    };
+
     return (
         <TagsStyle>
             <div className='tag_head'>
@@ -56,7 +67,7 @@ const Tags = () => {
                 </label>
                 <Button className='icon' onClick={addTag}><span><BsPlus></BsPlus></span></Button>
             </div>
-            <TagsList tags={tags}></TagsList>
+            <TagsList tags={tags} onDelete={deleteTag}></TagsList>
         </TagsStyle>
     )
 }

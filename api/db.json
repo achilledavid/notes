@@ -50,16 +50,6 @@
       "name": "shopping",
       "id": 1,
       "color": "#55a630"
-    },
-    {
-      "name": "aze",
-      "color": "#e91616",
-      "id": 3
-    },
-    {
-      "name": "chips",
-      "color": "#0f71cc",
-      "id": 4
     }
   ]
 }

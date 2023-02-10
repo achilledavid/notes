@@ -38,6 +38,16 @@ export const Button = styled.button`
         font-weight: 500;
         cursor:default;
 
+        p {
+            display: flex;
+            align-items: center;
+
+            svg {
+                margin-left: 5px;
+                cursor: pointer;
+            }
+        }
+
         &:hover {
             filter: brightness(1);
         }
