@@ -7,8 +7,8 @@ export const NoteInListSaved = ({ id, title, content, active, setIsSelected, loc
             <LinkToNoteStyleSaved className={active} to={`/notes/${id}`} onClick={() => setIsSelected(id)}>
                 {title}
                 <p>{content}</p>
-                {locked && <FaLock className="lock"></FaLock>}
-                {!locked && <FaUnlock className="lock"></FaUnlock>}
+                {/* {locked ? <FaLock className="lock"></FaLock> :
+                    <FaUnlock className="lock"></FaUnlock>} */}
             </LinkToNoteStyleSaved>
         </>
     );

@@ -7,8 +7,10 @@ import { useCallback } from 'react';
 import { Loader } from '../GlobalStyle';
 import { BsPin, BsFillPinFill, BsCheck2 } from "react-icons/bs";
 import { FaLock, FaTrash, FaUnlock } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 const Note = ({ onDelete, onUpdate, onPin, onLock }) => {
+    const navigate = useNavigate();
     const { id } = useParams();
     let [note, setNote] = useState(null);
     let [isSaved, setIsSaved] = useState(true);
@@ -25,6 +27,9 @@ const Note = ({ onDelete, onUpdate, onPin, onLock }) => {
         const response = await fetch(`/notes/${id}`);
         const data = await response.json();
         setNote(data);
+        if (!data.id) {
+            navigate('/');
+        }
     }, [id]);
 
     const fetchTags = useCallback(async () => {
@@ -38,11 +43,11 @@ const Note = ({ onDelete, onUpdate, onPin, onLock }) => {
     }, [id, fetchNote]);
 
     const updateNoteTitle = async (event) => {
-        setNote({ title: event.target.value, content: note.content, id: note.id, pinned: note.pinned, locked: note.locked });
+        setNote({ title: event.target.value, content: note.content, id: note.id, pinned: note.pinned, locked: note.locked, tags: note.tags });
     };
 
     const updateNoteContent = async (event) => {
-        setNote({ title: note.title, content: event.target.value, id: note.id, pinned: note.pinned, locked: note.locked });
+        setNote({ title: note.title, content: event.target.value, id: note.id, pinned: note.pinned, locked: note.locked, tags: note.tags });
     };
 
     useEffect(() => {
@@ -61,12 +66,25 @@ const Note = ({ onDelete, onUpdate, onPin, onLock }) => {
         if (status === 'delete') {
             if (isConfirm) {
                 onDelete(note.id);
-                console.log(note.id)
             } else {
             }
             setStatus('');
         }
     }, [isConfirm])
+
+    const addTagToNote = async (event) => {
+        event.preventDefault();
+        setNote({ title: note.title, content: note.content, id: note.id, pinned: note.pinned, locked: note.locked, tags: tags });
+        const response = await fetch(`/notes/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(note)
+        });
+        const data = await response.json();
+        setNote(data);
+    };
 
     return (
         <>
@@ -86,13 +104,19 @@ const Note = ({ onDelete, onUpdate, onPin, onLock }) => {
                                 {
                                     return note.tags.map((noteTag) => {
                                         if (tag.id === noteTag.id) {
-                                            console.log(tag.id);
                                             return (<Button className='tag small' style={{ color: tag.color }} key={tag.id} ># {tag.name}</Button>);
                                         }
                                     })
                                 }
                             })
                         }
+                        <select className='select_tag' onChange={addTagToNote}>
+                            <option value='' disabled selected>Add tag</option>
+                            {tags.map((tag) => {
+                                return (<option key={tag.id} value={tag.id} style={{ color: tag.color }} >{tag.name}</option>);
+                            })
+                            }
+                        </select>
                         {isSaved && <div className='check'>Saved<BsCheck2></BsCheck2></div>}{!isSaved && ''}
                     </ButtonContainer>
                 </Form>

@@ -30,6 +30,18 @@ export const ButtonContainer = styled.div`
   align-items: center;
   gap: 15px;
 
+  .select_tag {
+    border: none;
+    outline: none;
+    background: ${(props) => props.theme.main};
+    font-size: 0.75rem;
+    color: ${(props) => props.theme.color};
+    height: 100%;
+    padding: 0 10px;
+    appearance: none;
+    border-radius: 5px;
+  }
+
   .check {
     display: flex;
     align-items: center;

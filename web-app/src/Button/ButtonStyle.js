@@ -12,6 +12,9 @@ export const Button = styled.button`
     &.icon {
         height: 100%;
         aspect-ratio: 1/1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         &.small {
             padding: 8px;

@@ -230,9 +230,12 @@ function App() {
       <Main>
         <Container>
           <Routes>
+            <Route path="*"
+              element={<Empty>The page you are looking for does not exist.</Empty>}>
+            </Route>
             <Route
               path="/"
-              element={<Empty>Veuillez séléctionner une note</Empty>}
+              element={<Empty>Please, select a note.</Empty>}
             />
             <Route path="/addNote" element={<AddNote onAdd={addNote} />} />
             <Route path="/tags" element={<Tags />} />
