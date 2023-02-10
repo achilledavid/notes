@@ -1,19 +1,12 @@
-import { LinkToNoteStyle, LinkToNoteStyleSaved } from "./LinkToNoteStyle";
+import { LinkToNoteStyleSaved } from "./LinkToNoteStyle";
 
-export const NoteInList = ({ id, title, content }) => {
+export const NoteInListSaved = ({ id, title, content, active, setIsSelected }) => {
     return (
-        <LinkToNoteStyle to={`/notes/${id}`}>
-            {title}
-            <p>{content}</p>
-        </LinkToNoteStyle>
+        <>
+            <LinkToNoteStyleSaved className={active} to={`/notes/${id}`} onClick={() => setIsSelected(id)}>
+                {title}
+                <p>{content}</p>
+            </LinkToNoteStyleSaved>
+        </>
     );
-}
-
-export const NoteInListSaved = ({ id, title, content }) => {
-    return (
-        <LinkToNoteStyleSaved to={`/notes/${id}`}>
-            {title}
-            <p>{content}</p>
-        </LinkToNoteStyleSaved>
-    );
-}
+};

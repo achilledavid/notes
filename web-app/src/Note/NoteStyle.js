@@ -28,9 +28,16 @@ export const Textarea = styled.textarea`
 export const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
 
-  p {
-    font-size: 0.65rem
+  .check {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.75rem;
+
+    span {
+      font-size: 0.65rem;
+    }
   }
 `;

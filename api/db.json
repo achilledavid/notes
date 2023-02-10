@@ -1,14 +1,22 @@
 {
   "notes": [
     {
-      "title": "Buy milk",
-      "content": "Remember to buy milk and some lettuce",
-      "id": 1
+      "title": "Buy coffee",
+      "content": "Remember to buy coffee",
+      "id": 1,
+      "pinned": true
     },
     {
       "title": "Buy chocolate",
       "content": "Remember to buy chocolate.",
-      "id": 3
+      "id": 3,
+      "pinned": true
+    },
+    {
+      "title": "Buy milk",
+      "content": "Remember to buy milk and some lettuce.",
+      "id": 4,
+      "pinned": true
     }
   ],
   "profile": {

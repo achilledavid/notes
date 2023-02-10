@@ -6,12 +6,11 @@ const Modal = ({ changeStatus, onConfirm }) => {
         <ModalContainer>
             <div className="modal__container">
                 <h1>
-                    Êtes-vous sûr de vouloir supprimer
-                    la note ?
+                    Are you sure you want to delete the note?
                 </h1>
                 <div className="buttons">
-                    <Button onClick={() => { onConfirm(); changeStatus("") }}>Oui</Button>
-                    <Button onClick={() => changeStatus("")}>Non</Button>
+                    <Button onClick={() => { onConfirm(); changeStatus("") }}>Yes</Button>
+                    <Button onClick={() => changeStatus("")}>No</Button>
                 </div>
             </div>
         </ModalContainer>

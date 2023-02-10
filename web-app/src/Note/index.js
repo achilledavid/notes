@@ -5,8 +5,10 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useCallback } from 'react';
 import { Loader } from '../GlobalStyle';
+import { BsPin, BsFillPinFill, BsCheck2 } from "react-icons/bs";
+import { FaTrash } from "react-icons/fa";
 
-const Note = ({ onDelete, onUpdate }) => {
+const Note = ({ onDelete, onUpdate, onPin }) => {
     const { id } = useParams();
     let [note, setNote] = useState(null);
     let [isSaved, setIsSaved] = useState(true);
@@ -25,11 +27,11 @@ const Note = ({ onDelete, onUpdate }) => {
     }, [id, fetchNote]);
 
     const updateNoteTitle = async (event) => {
-        setNote({ title: event.target.value, content: note.content, id: note.id });
+        setNote({ title: event.target.value, content: note.content, id: note.id, pinned: note.pinned });
     };
 
     const updateNoteContent = async (event) => {
-        setNote({ title: note.title, content: event.target.value, id: note.id });
+        setNote({ title: note.title, content: event.target.value, id: note.id, pinned: note.pinned });
     };
 
     useEffect(() => {
@@ -63,8 +65,10 @@ const Note = ({ onDelete, onUpdate }) => {
                     <Textarea placeholder='Entrez votre texte ici...' value={note ? note.content : ""} onChange={updateNoteContent} />
                     {status === "delete" && <Modal changeStatus={setStatus} onConfirm={(event) => onDelete(event, id)} />}
                     <ButtonContainer>
-                        <Button onClick={() => setStatus("delete")}>Supprimer</Button>
-                        <p>{!isSaved && "Modifications non sauvegardées."}{isSaved && 'Modifications sauvegardées.'}</p>
+                        <Button className='icon small' title='delete note' onClick={() => setStatus("delete")}><span><FaTrash></FaTrash></span></Button>
+                        {note.pinned && <Button className='icon small' title='unpin note' onClick={(event) => onPin(note, id)}><span><BsFillPinFill></BsFillPinFill></span></Button>}
+                        {!note.pinned && <Button className='icon small' title='pin note' onClick={(event) => onPin(note, id)}><span><BsPin></BsPin></span></Button>}
+                        {isSaved && <div className='check'>Saved<BsCheck2></BsCheck2></div>}{!isSaved && ''}
                     </ButtonContainer>
                 </Form>
             }

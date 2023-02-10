@@ -26,7 +26,7 @@ export const ModalContainer = styled.div`
 
         h1 {
             font-size: 1rem;
-            color: ${(props) => props.theme.contrast};
+            color: #000;
         }
 
         .buttons {

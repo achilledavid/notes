@@ -20,7 +20,7 @@ const AddNote = ({ onAdd }) => {
         <Form onSubmit={(event) => { event.preventDefault(); onAdd(note); }}>
             <Title type='text' placeholder='Titre' onChange={updateNoteTitle} />
             <Textarea placeholder='Entrez votre texte ici...' onChange={updateNoteContent} />
-            <Button type='submit' >Ajouter</Button>
+            <Button type='submit' >Add</Button>
         </Form>
     );
 }

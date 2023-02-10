@@ -12,6 +12,7 @@ export const LinkToNoteStyleSaved = styled(Link)`
     font-size: 0.85rem;
     white-space: nowrap;
     overflow: hidden;
+    position: relative;
 
     &:hover {
         filter : brightness(0.9);
@@ -19,16 +20,21 @@ export const LinkToNoteStyleSaved = styled(Link)`
 
     p {
         margin-left: 5px;
-        opacity: 0.5;
+        opacity: 0.7;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
         font-size: 0.5rem
     }
-`;
 
-export const LinkToNoteStyle = styled(LinkToNoteStyleSaved)`
-    background-color: red;
+    &.selected {
+        background-color: ${(props) => props.theme.color};
+        color: ${(props) => props.theme.main};
+
+        p {
+            color: ${(props) => props.theme.main};
+        }
+    }
 `;
 
 export const LinkToAddStyle = styled(Link)`
@@ -36,12 +42,25 @@ export const LinkToAddStyle = styled(Link)`
     padding: 5px 10px;
     border-radius: 5px;
     background-color: ${(props) => props.theme.main};
-    cursor: pointer;
     text-decoration: none;
     font-size: 1rem;
     font-weight: 600;
+    cursor:default;
 
-    &:hover {
-        filter : brightness(0.9);
+    &.pin {
+        padding: 5px 0;
+    }
+
+    span {
+        font-size: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        border-bottom: 1px solid ${(props) => props.theme.color};
+        padding-bottom: 5px;
+
+        p {
+            font-size: 0.65rem;
+        }
     }
 `;

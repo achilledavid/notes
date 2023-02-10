@@ -34,7 +34,6 @@ export const Side = styled.aside`
   z-index: 1;
   top: 0;
   left: 0;
-  overflow-x: hidden;
   padding: ${globalPadding};
 `;
 
@@ -42,7 +41,7 @@ export const WhiteTheme = {
   sidebar: '#f1f1f1',
   body: '#ffffff',
   main: '#f1f1f1',
-  color: '#000000',
+  color: '#1e1e1e',
   contrast: '#ffffff',
 };
 
