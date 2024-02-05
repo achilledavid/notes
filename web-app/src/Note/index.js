@@ -90,7 +90,7 @@ const Note = ({ onDelete, onUpdate, onPin, onLock }) => {
         <>
             {note &&
                 <Form onSubmit={(event) => event.preventDefault()}>
-                    < Title type='text' placeholder='Title' readOnly={note.locked ? 'on' : 'off'} value={note ? note.title : ""} onChange={updateNoteTitle} />
+                    < Title type='text' placeholder='Title' readOnly={note.locked && 'on'} value={note ? note.title : ""} onChange={updateNoteTitle} />
                     <Textarea placeholder='Type your text here...' readOnly={note.locked && 'on'} value={note ? note.content : ""} onChange={updateNoteContent} />
                     {status === "delete" && <Modal changeStatus={setStatus} onConfirm={(event) => onDelete(event, id)} />}
                     <ButtonContainer>

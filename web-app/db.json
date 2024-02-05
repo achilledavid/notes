@@ -2,10 +2,10 @@
   "notes": [
     {
       "title": "Running",
-      "content": "Remember to run 5km.",
-      "id": 1,
+      "content": "Remember to run 5km.\nqsd\nqsdqs\ndqsd\n",
+      "id": "1",
       "pinned": false,
-      "locked": false,
+      "locked": true,
       "tags": [
         {
           "id": 2
@@ -15,7 +15,7 @@
     {
       "title": "Buy chocolate",
       "content": "Remember to buy chocolate.",
-      "id": 3,
+      "id": "3",
       "pinned": true,
       "locked": false,
       "tags": [
@@ -27,27 +27,12 @@
     {
       "title": "Buy milk",
       "content": "Remember to buy milk and some lettuce.",
-      "id": 4,
+      "id": "4",
       "pinned": true,
       "locked": false,
       "tags": [
         {
           "id": 1
-        }
-      ]
-    },
-    {
-      "title": "Buy running shoes",
-      "content": "Remember to buy running shoes",
-      "id": 5,
-      "pinned": false,
-      "locked": false,
-      "tags": [
-        {
-          "id": 1
-        },
-        {
-          "id": 2
         }
       ]
     }
@@ -58,13 +43,23 @@
   "tags": [
     {
       "name": "sport",
-      "id": 2,
+      "id": "2",
       "color": "#0077b6"
     },
     {
       "name": "shopping",
-      "id": 1,
+      "id": "1",
       "color": "#55a630"
+    },
+    {
+      "name": "mdp",
+      "color": "#ff0000",
+      "id": "3"
+    },
+    {
+      "name": "amour",
+      "color": "#ff7af4",
+      "id": "4"
     }
   ]
 }
